@@ -1,96 +1,91 @@
-var Bookkeeping = {workers : [],
-    newworker: function(n,a,o,s,we){
-        if(a) this.workers.push(new Worker(n,a,o,s,we));
-        else {
-            var temp;
-            this.workers.forEach(function(v,i){
-                if(v.name==n) temp = i;
-                else temp = undefined;
-            })
+var Bookkeeping = {
+    workers : [],
+    newworker(name, age, office, salary, workExperience){
+        if(arguments.length > 1) this.workers.push(new Worker(name, age, office, salary, workExperience));
+        if(arguments.length = 1) {
+            var temp = this.workers.indexOf(name);
             if(temp) this.workers.splice(temp,1);
         }
     },
-    printsorted: function(){
-        this.workers.sort(function(a,b){
-            if(a.salary<b.salary) return -1;
-            if(a.salary>b.salary) return 1;
+    printsorted(){
+        this.workers.sort((a,b) => {
+            if(a.salary < b.salary) return -1;
+            if(a.salary > b.salary) return 1;
             return 0;
         })
-        var sum_salary = 0;
-        this.workers.forEach(function(v){
-            sum_salary+=v.salary;
-            v.print();
+        var sumSalary = 0;
+        this.workers.forEach((value) => {
+            sumSalary += value.salary;
+            value.print();
         })
-        console.log('Total salary: '+sum_salary);
+        console.log(`Total salary: ${sumSalary}`);
     },
-    printminmax: function(){
-        var mins = this.workers[0].salary,
-        maxs = 0, avers = 0, imin = 0, imax;
-        this.workers.forEach(function(v, i){
-            if(v.salary < mins) {
-                mins = v.salary;
-                imin = i;
+    printminmax(){
+        var minSalary = this.workers[0].salary,
+        maxSalary = 0, averageSalary = 0, indexOfMin = 0, indexOfMax;
+        this.workers.forEach((value, index) => {
+            if(value.salary < minSalary) {
+                minSalary = value.salary;
+                indexOfMin = index;
             }
-            if(v.salary > maxs) {
-                maxs = v.salary;
-                imax = i;
+            if(value.salary > maxSalary) {
+                maxSalary = value.salary;
+                indexOfMax = index;
             }
-            avers += v.salary;
+            averageSalary += value.salary;
         })
-        avers /= this.workers.length;
+        averageSalary /= this.workers.length;
         console.log('Min salary: ');
-        this.workers[imin].print();
+        this.workers[indexOfMin].print();
         console.log('Max salary: ');
-        this.workers[imax].print();
-        console.log('Average salary: '+avers);
+        this.workers[indexOfMax].print();
+        console.log(`Average salary: ${averageSalary}`);
     },
-    printoffice: function(off_name){
-        var off_workers = this.workers.filter(function(x){return x.office==off_name});
-        var total_sal = 0, avers = 0,
-        aver_age = 0, max_we = 0, i_we;
-        off_workers.forEach(function(v,i){
-            total_sal += v.salary;
-            aver_age += v.age;
-            if(max_we < v.we) i_we = i;
-        })
-        avers = total_sal / off_workers.length;
-        aver_age /= off_workers.length;
-        console.log('Office name: '+off_name);
-        console.log('Total salary: '+total_sal);
-        console.log('Average salary: '+avers);
-        console.log('Number of workers: '+off_workers.length);
-        console.log('Average age: '+aver_age);
-        console.log('Maximal work experience: ');
-        off_workers[i_we].print();
+    printoffice(offName){
+        var totalSalary = 0, averageSalary = 0,
+        averageAge = 0, maxWorkExperience = 0, indexOfMaxWorkExperience;
+        var offWorkers = this.workers.filter(x => x.office==offName).forEach((value, index) => {
+            totalSalary += value.salary;
+            averageAge += value.age;
+            if(maxWorkExperience < value.workExperience) indexOfMaxWorkExperience = index;
+        });
+        averageSalary = totalSalary / offWorkers.length;
+        averageAge /= offWorkers.length;
+        console.log(`Office name: ${offName}`);
+        console.log(`Total salary: ${totalSalary}`);
+        console.log(`Average salary: ${averageSalary}`);
+        console.log(`Number of workers: ${offWorkers.length}`);
+        console.log(`Average age: ${averageAge}`);
+        console.log(`Maximal work experience: `);
+        offWorkers[indexOfMaxWorkExperience].print();
     }
 };
 
-function Worker(name, age, office, salary, we)
+function Worker(name, age, office, salary, workExperience)
 {
     this.name = name;
     this.age = age;
     this.office = office;
     this.salary = salary;
-    this.we = we;
-    this.print = function(){
-        console.log(this.name+'-'+this.age+'-'+this.office+'-'+this.salary+'-'+this.we);
-    }
+    this.workExperience = workExperience;
 }
 
+Worker.prototype.print = () => console.log(`${this.name} - ${this.age} - ${this.office} - ${this.salary} - ${this.workExperience}`);
+
 Bookkeeping.workers = [
-    new Worker('Ivan',21,'IT',1000,12),
-    new Worker('Erzhan',23,'Marketing', 1500, 18),
-    new Worker('Vlad',24,'Canteen',200,36)
+    new Worker('Ivan', 21, 'IT', 1000, 12),
+    new Worker('Erzhan', 23, 'Marketing', 1500, 18),
+    new Worker('Vlad', 24, 'Canteen', 200, 36)
 ]
 
-Bookkeeping.workers[0].print();
-Bookkeeping.newworker('Rovshan',21,'IT',450,1);
-Bookkeeping.workers[Bookkeeping.workers.length-1].print();
-Bookkeeping.newworker('Ivan');
-Bookkeeping.workers[0].print();
-console.log('-------------------');
-Bookkeeping.printsorted();
-console.log('-------------------');
-Bookkeeping.printminmax();
-console.log('-------------------');
-Bookkeeping.printoffice('IT');
+Bookkeeping.workers[0].print.bind(Bookkeeping.workers[0])();
+// Bookkeeping.newworker('Rovshan',21,'IT',450,1);
+// Bookkeeping.workers[Bookkeeping.workers.length-1].print();
+// Bookkeeping.newworker('Ivan');
+// Bookkeeping.workers[0].print();
+// console.log('-------------------');
+// Bookkeeping.printsorted();
+// console.log('-------------------');
+// Bookkeeping.printminmax();
+// console.log('-------------------');
+// Bookkeeping.printoffice('IT');
