@@ -70,7 +70,8 @@ function Worker(name, age, office, salary, workExperience)
     this.workExperience = workExperience;
 }
 
-Worker.prototype.print = () => console.log(`${this.name} - ${this.age} - ${this.office} - ${this.salary} - ${this.workExperience}`);
+Worker.prototype.print = function () { console.log(`${this.name} - ${this.age} - ${this.office} - ${this.salary} - ${this.workExperience}`)};
+// Worker.prototype.print = () => {console.log(this); console.log(`${this.name} - ${this.age} - ${this.office} - ${this.salary} - ${this.workExperience}`) }; // контекст тот что знаружи
 
 Bookkeeping.workers = [
     new Worker('Ivan', 21, 'IT', 1000, 12),
@@ -78,7 +79,9 @@ Bookkeeping.workers = [
     new Worker('Vlad', 24, 'Canteen', 200, 36)
 ]
 
-Bookkeeping.workers[0].print.bind(Bookkeeping.workers[0])();
+// Bookkeeping.workers[0].print.bind(Bookkeeping.workers[0])();
+Bookkeeping.workers[0].print();
+
 // Bookkeeping.newworker('Rovshan',21,'IT',450,1);
 // Bookkeeping.workers[Bookkeeping.workers.length-1].print();
 // Bookkeeping.newworker('Ivan');
