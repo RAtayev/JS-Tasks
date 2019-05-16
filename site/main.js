@@ -20,11 +20,13 @@ function statisticPage(){
 
 function locationHashChanged(){
     (location.hash === "#/main/") && mainPage();
+    (location.hash === "#/main/") && addAutos();
     (location.hash === "#/statistic/") && statisticPage();
 }
 
 function onLoad(){
     location.hash = "#/main/";
+    addAutos(autosArr);
 }
 
 document.getElementById("main").addEventListener("click", event => {
@@ -39,27 +41,29 @@ window.onload = onLoad;
 window.onhashchange = locationHashChanged;
 
 function addAutos(autosArray){
+    console.log("addingAutos");
     var autos = document.getElementById("autos");
-    for(let i = 0; i < autos.length; i++)
+    for(let i = 0; i < autosArray.length; i++)
     {
+        console.log("1");
         let auto = document.createElement('div');
         auto.className = "auto";
         autos.appendChild(auto);
         let nameAuto = document.createElement('div');
         nameAuto.className = "nameAuto";
-        nameAuto.innerHTML = autosArray[i].keys()[0];
+        nameAuto.innerHTML = autosArray[i][Object.keys(autosArray[i])[0]];
         let priceAuto = document.createElement('div');
         priceAuto.className = "priceAuto";
-        priceAuto.innerHTML = autosArray[i].keys()[1];
+        priceAuto.innerHTML = autosArray[i][Object.keys(autosArray[i])[1]];
         let autoImageContainer = document.createElement('div');
         autoImageContainer.className = "autoImageContainer";
         let autoImage = document.createElement('img');
         autoImage.id = "autoImage";
-        autoImage.src = autosArray[i].keys()[2];
-        autoImage.alt = autosArray[i].keys()[0];
+        autoImage.src = autosArray[i][Object.keys(autosArray[i])[2]];
+        autoImage.alt = autosArray[i][Object.keys(autosArray[i])[0]];
         let orderAuto = document.createElement('button');
         orderAuto.className = "orderAuto";
-        orderAuto.id = "order" + autosArray[i].keys()[0];
+        orderAuto.id = "order" + autosArray[i][Object.keys(autosArray[i])[0]];
         orderAuto.innerHTML = "ЗАКАЗАТЬ";
         let tempAuto = document.getElementsByClassName("auto");
         tempAuto[tempAuto.length - 1].appendChild(nameAuto);
@@ -69,5 +73,3 @@ function addAutos(autosArray){
         tempAuto[tempAuto.length - 1].appendChild(orderAuto);
     }
 }
-
-addAutos(autosArr);
