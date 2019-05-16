@@ -11,7 +11,9 @@ function locationHashChanged(){
     (location.hash === "#/statistic/") && statisticPage();
 }
 
-window.onhashchange = locationHashChanged;
+function onLoad(){
+    location.hash = "#/main/";
+}
 
 document.getElementById("main").addEventListener("click", event => {
     location.hash = "#/main/";
@@ -20,3 +22,6 @@ document.getElementById("main").addEventListener("click", event => {
 document.getElementById("statistic").addEventListener("click", event => {
     location.hash = "#/statistic/";
 })
+
+window.onload = onLoad;
+window.onhashchange = locationHashChanged;
