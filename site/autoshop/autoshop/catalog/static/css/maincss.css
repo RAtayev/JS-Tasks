@@ -1,0 +1,133 @@
+html{
+    background: white;
+    font-family: sans-serif;
+}
+
+.menu{
+    border-bottom: 1px solid gray;
+    height: 9vh;
+    display: flex;
+    align-content: center;
+}
+#logo_container{
+    height: 9vh;
+}
+
+#logo{
+    width: auto;
+    height: 90%;
+}
+
+.tabs_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+#main{
+    font-size: 3vh;
+    line-height: 8vh;
+    background: white;
+    width: auto;
+    box-sizing: border-box;
+    margin-bottom: 3px;
+    border: none;
+    border-bottom: 6px solid orange;
+}
+
+#statistic{
+    font-size: 3vh;
+    line-height: 8vh;
+    background: white;
+    width: auto;
+    box-sizing: border-box;
+    margin: 0px 10px;
+    margin-bottom: 3px;
+    border: none;
+}
+
+#main:focus{
+    border: 0;
+}
+
+#statistic:focus{
+    border: 0;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+}
+
+.main_content{
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+}
+
+#head{
+    box-sizing: border-box;
+    font-size: 40px;
+    font-weight: bold;
+    width: 100%;
+}
+
+#desc{
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: bold;
+    width: 100%;
+}
+
+#autos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 50vw;
+    box-sizing: border-box;
+}
+
+.auto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 340px;
+    margin: 20px;
+}
+
+.autoImageContainer{
+    display: flex;
+    align-content: center;
+    margin: 0px 20px;
+}
+
+#autoImage{
+    width: 100%;
+    height: 100%;
+}
+
+.priceAuto{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0px 20px;
+}
+
+.nameAuto{
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin: 0px 20px;
+}
+
+.orderAuto{
+    margin: 0px 20px;
+    height: 40px;
+    font-weight: bold;
+    background: orange;
+    border: none;
+    font-size: 20px;
+}

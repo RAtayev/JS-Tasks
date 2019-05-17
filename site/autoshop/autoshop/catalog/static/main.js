@@ -1,6 +1,6 @@
 var main = document.getElementById("main_content");
 var statistic = document.getElementById("statistic_content");
-// var autosArr = [{name: "Renault Koleos", price: "от 50000 BYN", imSrc: "images/koleos.jpg"}];
+var autosArr = [{name: "Renault Koleos", price: "от 50000 BYN", imSrc: "images/koleos.jpg"}];
 
 function mainPage(){
     document.getElementById("main").style.borderBottom = "6px solid orange";
@@ -26,13 +26,7 @@ function locationHashChanged(){
 
 function onLoad(){
     location.hash = "#/main/";
-    let xhr = new XMLHttpRequest;
-    xhr.open('GET', 'http://localhost:8000/main');
-    xhr.send();
-    xhr.onload = function(){
-        console.log(xhr.responseType);
-    };
-    // addAutos(autosArr);
+    addAutos(autosArr);
 }
 
 document.getElementById("main").addEventListener("click", event => {
