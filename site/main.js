@@ -1,6 +1,6 @@
 var main = document.getElementById("main_content");
 var statistic = document.getElementById("statistic_content");
-// var autosArr = [{name: "Renault Koleos", price: "от 50000 BYN", imSrc: "images/koleos.jpg"}];
+var autosArr = [];
 
 function mainPage(){
     document.getElementById("main").style.borderBottom = "6px solid orange";
@@ -20,19 +20,20 @@ function statisticPage(){
 
 function locationHashChanged(){
     (location.hash === "#/main/") && mainPage();
-    (location.hash === "#/main/") && addAutos();
+    (location.hash === "#/main/") && addAutos(autosArr);
     (location.hash === "#/statistic/") && statisticPage();
 }
 
 function onLoad(){
     location.hash = "#/main/";
     let xhr = new XMLHttpRequest;
-    xhr.open('GET', 'http://localhost:8000/main');
+    xhr.open('GET', 'http://localhost:8000/catalog');
     xhr.send();
     xhr.onload = function(){
-        console.log(xhr.responseType);
+        autosArr = JSON.parse(xhr.responseText);
+        console.log(autosArr[0]["image"])
     };
-    // addAutos(autosArr);
+    addAutos(autosArr);
 }
 
 document.getElementById("main").addEventListener("click", event => {
@@ -57,19 +58,19 @@ function addAutos(autosArray){
         autos.appendChild(auto);
         let nameAuto = document.createElement('div');
         nameAuto.className = "nameAuto";
-        nameAuto.innerHTML = autosArray[i][Object.keys(autosArray[i])[0]];
+        nameAuto.innerHTML = autosArray[i]["name"];
         let priceAuto = document.createElement('div');
         priceAuto.className = "priceAuto";
-        priceAuto.innerHTML = autosArray[i][Object.keys(autosArray[i])[1]];
+        priceAuto.innerHTML = autosArray[i]["price"];
         let autoImageContainer = document.createElement('div');
         autoImageContainer.className = "autoImageContainer";
         let autoImage = document.createElement('img');
         autoImage.id = "autoImage";
-        autoImage.src = autosArray[i][Object.keys(autosArray[i])[2]];
-        autoImage.alt = autosArray[i][Object.keys(autosArray[i])[0]];
+        autoImage.src = "http://localhost:8000/catalog/" + autosArray[i]["image"];
+        autoImage.alt = autosArray[i][Object.keys(autosArray[i])[1]];
         let orderAuto = document.createElement('button');
         orderAuto.className = "orderAuto";
-        orderAuto.id = "order" + autosArray[i][Object.keys(autosArray[i])[0]];
+        orderAuto.id = "order" + autosArray[i]["name"];
         orderAuto.innerHTML = "ЗАКАЗАТЬ";
         let tempAuto = document.getElementsByClassName("auto");
         tempAuto[tempAuto.length - 1].appendChild(nameAuto);
