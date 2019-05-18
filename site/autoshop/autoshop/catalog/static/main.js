@@ -14,6 +14,7 @@ function mainPage(){
 }
 
 function statisticPage(){
+    loadStatistic();
     document.getElementById("main").style.borderBottom = "none";
     document.getElementById("statistic").style.borderBottom = "6px solid orange";
     main.style.display = "none";
@@ -79,6 +80,15 @@ function loadAutos(){
     xhr.send();
 }
 
+function loadStatistic(){
+    let xhr = new XMLHttpRequest;
+    xhr.open('GET', 'http://localhost:8000/catalog/statistic')
+    xhr.onload = function(){
+        console.log(xhr.responseText);
+    }
+    xhr.send();
+}
+
 document.getElementById("main").addEventListener("click", event => {
     location.hash = "#/main/";
 })
@@ -95,37 +105,43 @@ function addAutos(autosArray){
     var autos = document.getElementById("autos");
     for(let i = 0; i < autosArray.length; i++)
     {
-        let auto = document.createElement('div');
-        auto.className = "auto";
-        autos.appendChild(auto);
-        let nameAuto = document.createElement('div');
-        nameAuto.className = "nameAuto";
-        nameAuto.innerHTML = autosArray[i]["name"];
-        let priceAuto = document.createElement('div');
-        priceAuto.className = "priceAuto";
-        priceAuto.innerHTML = autosArray[i]["price"];
-        let autoImageContainer = document.createElement('div');
-        autoImageContainer.className = "autoImageContainer";
-        let autoImage = document.createElement('img');
-        autoImage.id = "autoImage";
-        let tempsrc = "/static/" + autosArray[i]["image"];
-        console.log(tempsrc);
-        autoImage.src = tempsrc;
-        autoImage.alt = autosArray[i][Object.keys(autosArray[i])[1]];
-        let orderAuto = document.createElement('button');
-        orderAuto.className = "orderAuto";
-        orderAuto.id = "order" + autosArray[i]["name"];
-        orderAuto.innerHTML = "ЗАКАЗАТЬ";
-        orderAuto.addEventListener('click', event => {
-            orderId = event.target.id;
-            location.hash = "#/order/"
-        })
-        let tempAuto = document.getElementsByClassName("auto");
-        tempAuto[tempAuto.length - 1].appendChild(nameAuto);
-        tempAuto[tempAuto.length - 1].appendChild(priceAuto);
-        tempAuto[tempAuto.length - 1].appendChild(autoImageContainer);
-        tempAuto[tempAuto.length - 1].childNodes[2].appendChild(autoImage);
-        tempAuto[tempAuto.length - 1].appendChild(orderAuto);
+        console.log("1");
+        let repeatNameCheck = document.getElementById("id " + autosArray[i]["name"]);
+        if(!repeatNameCheck){
+            console.log("2");
+            let auto = document.createElement('div');
+            auto.className = "auto";
+            autos.appendChild(auto);
+            let nameAuto = document.createElement('div');
+            nameAuto.className = "nameAuto";
+            nameAuto.id = "id " + autosArray[i]["name"];
+            nameAuto.innerHTML = autosArray[i]["name"];
+            let priceAuto = document.createElement('div');
+            priceAuto.className = "priceAuto";
+            priceAuto.innerHTML ="От " + autosArray[i]["price"] + "BYN";
+            let autoImageContainer = document.createElement('div');
+            autoImageContainer.className = "autoImageContainer";
+            let autoImage = document.createElement('img');
+            autoImage.id = "autoImage";
+            let tempsrc = "/static/" + autosArray[i]["image"];
+            console.log(tempsrc);
+            autoImage.src = tempsrc;
+            autoImage.alt = autosArray[i][Object.keys(autosArray[i])[1]];
+            let orderAuto = document.createElement('button');
+            orderAuto.className = "orderAuto";
+            orderAuto.id = "order" + autosArray[i]["name"];
+            orderAuto.innerHTML = "ЗАКАЗАТЬ";
+            orderAuto.addEventListener('click', event => {
+                orderId = event.target.id;
+                location.hash = "#/order/"
+            })
+            let tempAuto = document.getElementsByClassName("auto");
+            tempAuto[tempAuto.length - 1].appendChild(nameAuto);
+            tempAuto[tempAuto.length - 1].appendChild(priceAuto);
+            tempAuto[tempAuto.length - 1].appendChild(autoImageContainer);
+            tempAuto[tempAuto.length - 1].childNodes[2].appendChild(autoImage);
+            tempAuto[tempAuto.length - 1].appendChild(orderAuto);
+        }
     }
 }
 
