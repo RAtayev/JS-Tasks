@@ -7,52 +7,60 @@
     <link type="text/css" rel="stylesheet" href="{% static 'css/maincss.css' %}">
 </head>
 <body>
-    <div class="menu">
-        <div id="logo_container">
-            {% load static %}
-            <img id="logo" src="{% static 'images/logo.png' %}" alt="Logo"/>
-        </div>
-        <div class="tabs_container">
-            <div id="main">
-                Главная
+    <div id="meta_container">
+        <div class="menu">
+            <div id="logo_container">
+                {% load static %}
+                <img id="logo" src="{% static 'images/logo.png' %}" alt="Logo"/>
             </div>
-            <div id="statistic">
-                Статистика
-            </div>
-        </div>
-    </div>
-    <div class="content">
-        <div id="main_content">
-            <div id="head">Главная страница</div>
-            <div id="desc">Выберите автомобиль и закажите онлайн</div>
-            <div id="autos">
-                <!-- <div class="auto">
-                    <div class="nameAuto">Renault Logan</div>
-                    <div class="priceAuto">от 20000 BYN</div>
-                    <div class="autoImageContainer"><img id="autoImage" src="images/logan.jpg" alt="Renault Logan"></div>
-                    <button class="orderAuto" id="orderRenault Logan">ЗАКАЗАТЬ</button>
+            <div class="tabs_container">
+                <div id="main">
+                    Главная
                 </div>
-                <div class="auto">
-                    <div class="nameAuto">Renault Duster</div>
-                    <div class="priceAuto">от 25000 BYN</div>
-                    <div class="autoImageContainer"><img id="autoImage" src="images/duster.jpg" alt="Renault Duster"></div>
-                    <button class="orderAuto" id="orderRenault Duster">ЗАКАЗАТЬ</button>
+                <div id="statistic">
+                    Статистика
                 </div>
-                <div class="auto">
-                    <div class="nameAuto">Renault Kaptur</div>
-                    <div class="priceAuto">от 30000 BYN</div>
-                    <div class="autoImageContainer"><img id="autoImage" src="images/kaptur.jpg" alt="Renault Kaptur"></div>
-                    <button class="orderAuto" id="orderRenault Kaptur">ЗАКАЗАТЬ</button>
-                </div>
-                <div class="auto">
-                    <div class="nameAuto">Renault Sandero</div>
-                    <div class="priceAuto">от 19000 BYN</div>
-                    <div class="autoImageContainer"><img id="autoImage" src="images/sandero.jpg" alt="Renault Sandero"></div>
-                    <button class="orderAuto" id="orderRenault Sandero">ЗАКАЗАТЬ</button>
-                </div> -->
             </div>
         </div>
-        <div id="statistic_content" style="display: none">Статистика</div>
+        <div class="content">
+            <div id="main_content">
+                <div id="head">Главная страница</div>
+                <div id="desc">Выберите автомобиль и закажите онлайн</div>
+                <div id="autos">
+                    <!-- <div class="auto">
+                        <div class="nameAuto">Renault Logan</div>
+                        <div class="priceAuto">от 20000 BYN</div>
+                        <div class="autoImageContainer"><img id="autoImage" src="images/logan.jpg" alt="Renault Logan"></div>
+                        <button class="orderAuto" id="orderRenault Logan">ЗАКАЗАТЬ</button>
+                    </div>
+                    <div class="auto">
+                        <div class="nameAuto">Renault Duster</div>
+                        <div class="priceAuto">от 25000 BYN</div>
+                        <div class="autoImageContainer"><img id="autoImage" src="images/duster.jpg" alt="Renault Duster"></div>
+                        <button class="orderAuto" id="orderRenault Duster">ЗАКАЗАТЬ</button>
+                    </div>
+                    <div class="auto">
+                        <div class="nameAuto">Renault Kaptur</div>
+                        <div class="priceAuto">от 30000 BYN</div>
+                        <div class="autoImageContainer"><img id="autoImage" src="images/kaptur.jpg" alt="Renault Kaptur"></div>
+                        <button class="orderAuto" id="orderRenault Kaptur">ЗАКАЗАТЬ</button>
+                    </div>
+                    <div class="auto">
+                        <div class="nameAuto">Renault Sandero</div>
+                        <div class="priceAuto">от 19000 BYN</div>
+                        <div class="autoImageContainer"><img id="autoImage" src="images/sandero.jpg" alt="Renault Sandero"></div>
+                        <button class="orderAuto" id="orderRenault Sandero">ЗАКАЗАТЬ</button>
+                    </div> -->
+                </div>
+            </div>
+            <div id="statistic_content" style="display: none">Статистика</div>
+        </div>
+        <div class="b-popup" style="display: none">
+            <div class="b-popup-content">
+                <div id="orderMake">Оформление заказа</div>
+                <button id="orderButton">ОФОРМИТЬ ЗАКАЗ</button>
+            </div>
+        </div>
     </div>
     {% load static %}
     <script src="{% static 'main.js' %}"></script>
